@@ -111,18 +111,6 @@ function shuffle<T>(arr: T[]): T[] {
   return result;
 }
 
-function mostFrequent(arr: number[]): number | undefined {
-  if (arr.length === 0) return undefined;
-
-  return arr
-    .sort(
-      (a, b) =>
-        arr.filter(v => v === a).length -
-        arr.filter(v => v === b).length
-    )
-    .at(-1);
-}
-
 function eval_board(board: (1 | 2 | 3 | 4 | 5)[]): number {
     const n = Math.sqrt(board.length);
     if (!Number.isInteger(n)) return -Infinity;
