@@ -106,12 +106,11 @@ const Board = forwardRef<HTMLDivElement, { board: item_t[], width: number, heigh
     return (
         <div 
             ref={ref} 
-            className="w-full h-full bg-background border shadow-sm overflow-hidden p-1"
+            className="w-full h-full bg-background border shadow-sm overflow-hidden p-4 gap-4"
             style={{ 
                 display: 'grid',
                 gridTemplateColumns: `repeat(${width}, 1fr)`,
                 gridTemplateRows: `repeat(${height}, 1fr)`,
-                gap: '2px'
             }}
         >
             {Array.from({ length: width * height }).map((_, i) => {
@@ -120,7 +119,7 @@ const Board = forwardRef<HTMLDivElement, { board: item_t[], width: number, heigh
                 return (
                     <div
                         key={i}
-                        className="border rounded-[2px] flex items-center justify-center text-center p-1 overflow-hidden"
+                        className="border rounded-sm flex items-center justify-center text-center p-1 overflow-hidden"
                         style={{
                             borderColor: hasItem ? difficulty_colors[cell.difficulty - 1] : "#e5e7eb",
                             backgroundColor: hasItem ? `${difficulty_colors[cell.difficulty - 1]}15` : "transparent",
@@ -195,7 +194,7 @@ export default function BoardGenerator() {
 
     const handleExport = async (type: 'png' | 'copy') => {
         if (!board_ref.current) return;
-        const config = { pixelRatio: 2, skipFonts: true, backgroundColor: '#ffffff' };
+        const config = { pixelRatio: 2, skipFonts: true };
         if (type === 'png') {
             const url = await htmlToImage.toPng(board_ref.current, config);
             const l = document.createElement("a"); l.download = "board.png"; l.href = url; l.click();
